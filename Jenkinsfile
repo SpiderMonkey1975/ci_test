@@ -14,6 +14,7 @@ pipeline {
     post {
         success {
             sh 'rm -rf fv3gfs-fortran'
+            echo 'SUCCESSFUL RUN'
         }
     {
 }
