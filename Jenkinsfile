@@ -1,10 +1,19 @@
 pipeline {
-    agent { docker { image 'python:3.5.1' } }
+    agent any
     stages {
-        stage('build') {
+        stage('Repo Clone') {
             steps {
-                sh 'python --version'
+                timeout(time: 3, unit: 'MINUTES') {
+                    retry(3) {
+                        sh 'git clone https://github.com/VulcanClimateModeling/fv3gfs-fortran.git'
+                    }
+                }
             }
         }
     }
+    post {
+        success {
+            sh 'rm -rf fv3gfs-fortran'
+        }
+    {
 }
